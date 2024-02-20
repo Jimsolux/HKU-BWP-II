@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,13 +11,14 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpForce = 10;
     private Rigidbody2D rb2d;
-    private bool isGrounded;
     [SerializeField] private float moveVertical; // = Input.GetAxis("Vertical");
     [SerializeField] float moveHorizontal;
     public Transform groundChecker;
     //flip
     bool facingRight = true;
 
+    [Header("Debug")]
+    [SerializeField] private bool isGrounded;
 
     void Start()
     {
@@ -37,6 +39,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)  //if SPACE & player is on ground, makes player jump
         {
             GetComponent<Rigidbody2D>().AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+        if (isGrounded)
+        {
+            animator.SetBool("IsJumping", false);
+        }
+        else
+        {
             animator.SetBool("IsJumping", true);
         }
 
@@ -52,10 +62,6 @@ public class PlayerController : MonoBehaviour
         //Animation automation
         animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
 
-        if(isGrounded)
-        {
-            //animator.SetBool("IsJumping", false);
-        }
     }
 
 
