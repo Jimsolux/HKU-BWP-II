@@ -41,7 +41,7 @@ public class LaserBeam
         laserIndices.Add( pos );
         //Debug.Log(laserIndices.Count);
         ray = new Ray2D(pos, dir);
-        RaycastHit2D hit = Physics2D.Raycast(pos, dir, 30, 1);
+        RaycastHit2D hit = Physics2D.Raycast(pos, dir, 30, layerMask);
 
         if(Physics2D.Raycast(pos, dir, 30, layerMask))
         {

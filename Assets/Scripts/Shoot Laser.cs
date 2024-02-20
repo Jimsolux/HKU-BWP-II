@@ -13,7 +13,5 @@ public class ShootLaser : MonoBehaviour
         Destroy(GameObject.Find("Laser Beam"));
 
         beam = new LaserBeam(gameObject.transform.position, gameObject.transform.right, material, laserMask);
-
-        
     }
 }
