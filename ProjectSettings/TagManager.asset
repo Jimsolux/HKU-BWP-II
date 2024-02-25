@@ -11,6 +11,7 @@ TagManager:
   - LifeHeart
   - Damagable
   - Piercable
+  - Receiver
   layers:
   - Default
   - TransparentFX

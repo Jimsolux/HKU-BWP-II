@@ -47,7 +47,7 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseUp()    // releasing mouse re enables the grabbing and gravity.
     {
-        rb.gravityScale = 1;
+        rb.gravityScale = .5f;
         isDraggable = true; 
     }
 

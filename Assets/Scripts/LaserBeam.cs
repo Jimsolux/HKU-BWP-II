@@ -61,7 +61,7 @@ public class LaserBeam
         laser.positionCount = laserIndices.Count;
 
         //string layerMaskName = layerMask.LayerToName(layerMask.value);
-        Debug.Log(layerMask.value);
+        //Debug.Log(layerMask.value);
 
         foreach(Vector2 idx in laserIndices )
         {
@@ -98,8 +98,18 @@ public class LaserBeam
             //laserIndices.Add(ray.GetPoint(30));
             //UpdateLaser();
         }
+        if (hitinfo.collider.gameObject.tag == "Receiver")
+        {
+            hitinfo.collider.gameObject.TryGetComponent<LaserReceiver>(out LaserReceiver receiver);
+            receiver.SetItActive();
+            laserIndices.Add(hitinfo.point);
+            UpdateLaser();
+            return;
+        }
         else
-        {   
+        {
+            //hitinfo.collider.gameObject.TryGetComponent<LaserReceiver>(out LaserReceiver receiver);
+            //receiver.IsBeingHit(false);
             laserIndices.Add(hitinfo.point);
             UpdateLaser();
         }

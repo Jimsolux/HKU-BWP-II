@@ -25,11 +25,14 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
+
+
     private void FixedUpdate()  // Runs before update.
     {
         isGrounded = IsGrounded();  // Uses function to determine if the player is on the floor.
         
     }
+
     void Update()
     {
         moveHorizontal = Input.GetAxis("Horizontal");
