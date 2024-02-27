@@ -23,7 +23,7 @@ public class MapChecker : MonoBehaviour
             Wall1Off();
             Destroy(heart1);
         }
-        Debug.Log(hearthealth.health);
+        //Debug.Log(hearthealth.health);
     }
 
     public void Wall1Off()

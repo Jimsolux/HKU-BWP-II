@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LaserReceiver : MonoBehaviour
 {
-    private Coroutine karmaDelay;
+    private Coroutine Delay;
     public bool beingHit = false;
     private float offDelay;
+    public float receiverHealth = 100;
+
+    public UnityEvent LaserHitEvent;
 
     private void Start()
     {
@@ -15,7 +19,6 @@ public class LaserReceiver : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //IsBeingHit(false);
     }
 
     private void Update()
@@ -30,22 +33,20 @@ public class LaserReceiver : MonoBehaviour
         {
             Debug.Log("I'm not being Hit xx");
         }
-
+    if(beingHit && receiverHealth <= 0) { LaserHitEvent.Invoke(); }
     }
-    //public bool IsBeingHit(bool hitinfo)
-    //{
-    //    bool currentlyHit;
-    //    if (hitinfo) { beingHit = true; } else { beingHit = false; }
-    //    hitinfo = false;
 
-    //    //beingHit = currentlyHit;
-    //    return currentlyHit;
-    //}
-
+    public void TakeDamage(float amount)
+    {
+        if(beingHit)
+        {
+            receiverHealth -= amount;
+        }
+    }
     public void SetItActive()
     {
         beingHit = true;
-        StartCoroutine(KarmaDelayRoutine());
+        StartCoroutine(DelayRoutine());
     }
 
     public void SetItInactive()
@@ -53,7 +54,7 @@ public class LaserReceiver : MonoBehaviour
         beingHit= false;
     }
 
-    IEnumerator KarmaDelayRoutine()
+    IEnumerator DelayRoutine()
     {
         yield return new WaitForSeconds(offDelay);
         SetItInactive();

@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public int health;
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] public float health;
+    [SerializeField] private float maxHealth = 1000;
 
     private void Start()
     {
         health = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
     }

@@ -8,11 +8,12 @@ public class LaserBeam
 
     Vector2 pos, dir;
 
-    GameObject laserObj;
+    public GameObject laserObj;
     LineRenderer laser;
     List<Vector2> laserIndices = new List<Vector2>();
     Ray2D ray;
-    private int maxBounces = 10;
+    private int maxBounces = 50;
+    private float laserDamage = 10f;
     private LayerMask layerMask;
 
     public LaserBeam(Vector2 pos, Vector2 dir, Material material, LayerMask laserMask)
@@ -30,8 +31,9 @@ public class LaserBeam
         this.laser.startColor = Color.green;
         this.laser.endColor = Color.green;
         this.layerMask = laserMask;
-            //LayerMask.GetMask("Default") | LayerMask.GetMask("DraggableObject") | LayerMask.GetMask("Player");
-
+        this.laserObj.layer = 8;
+        //LayerMask.GetMask("Default") | LayerMask.GetMask("DraggableObject") | LayerMask.GetMask("Player");
+        //Debug.Log(LayerMask.NameToLayer("Laser"));
 
         CastRay(pos, dir, laser);
     }
@@ -39,7 +41,7 @@ public class LaserBeam
     void CastRay(Vector2 pos, Vector2 dir, LineRenderer laser )
     {
         laserIndices.Add( pos );
-        //Debug.Log(laserIndices.Count);
+
         ray = new Ray2D(pos, dir);
         RaycastHit2D hit = Physics2D.Raycast(pos, dir, 30, layerMask);
 
@@ -60,9 +62,6 @@ public class LaserBeam
         int count = 0;
         laser.positionCount = laserIndices.Count;
 
-        //string layerMaskName = layerMask.LayerToName(layerMask.value);
-        //Debug.Log(layerMask.value);
-
         foreach(Vector2 idx in laserIndices )
         {
             laser.SetPosition(count,idx);
@@ -78,7 +77,7 @@ public class LaserBeam
         {
             Vector2 pos2 = hitinfo.point;
             Vector2 dir2 = Vector2.Reflect(direction, hitinfo.normal);
-            if (laserIndices.Count <= 50)   // As long as there are less than 50 lasers, a new laser is shot with the reflected angles.
+            if (laserIndices.Count <= maxBounces)   // As long as there are less than 50 lasers, a new laser is shot with the reflected angles.
             {
                 CastRay(pos2 + (dir2 / 10), dir2, laser);
             } 
@@ -87,20 +86,15 @@ public class LaserBeam
         if (hitinfo.collider.gameObject.tag == "Damagable" || hitinfo.collider.gameObject.tag == "LifeHeart")
         {
             hitinfo.collider.gameObject.TryGetComponent<Health>( out Health health);
-            health.TakeDamage(1);
+            health.TakeDamage(laserDamage);
             laserIndices.Add(hitinfo.point);
             UpdateLaser();
-        }
-        if (hitinfo.collider.gameObject.tag == "Piercable") // Creates a new laser in the same direction after collision.
-        {
-            //CastRay(pos, dir, laser);
-            
-            //laserIndices.Add(ray.GetPoint(30));
-            //UpdateLaser();
         }
         if (hitinfo.collider.gameObject.tag == "Receiver")
         {
             hitinfo.collider.gameObject.TryGetComponent<LaserReceiver>(out LaserReceiver receiver);
+            //receiver.LaserHitEvent.Invoke();
+            receiver.TakeDamage(laserDamage);
             receiver.SetItActive();
             laserIndices.Add(hitinfo.point);
             UpdateLaser();
