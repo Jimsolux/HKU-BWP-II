@@ -13,7 +13,7 @@ public class LaserBeam
     List<Vector2> laserIndices = new List<Vector2>();
     Ray2D ray;
     private int maxBounces = 50;
-    private float laserDamage = 10f;
+    private float laserDamage = 20f;
     private LayerMask layerMask;
 
     public LaserBeam(Vector2 pos, Vector2 dir, Material material, LayerMask laserMask)
@@ -83,7 +83,7 @@ public class LaserBeam
             } 
         }// end mirror
 
-        if (hitinfo.collider.gameObject.tag == "Damagable" || hitinfo.collider.gameObject.tag == "LifeHeart")
+        if (hitinfo.collider.gameObject.tag == "Damagable" || hitinfo.collider.gameObject.tag == "LifeHeart" || hitinfo.collider.gameObject.tag == "Player")
         {
             hitinfo.collider.gameObject.TryGetComponent<Health>( out Health health);
             health.TakeDamage(laserDamage);
