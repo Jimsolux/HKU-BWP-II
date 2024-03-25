@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     //flip
     bool facingRight = true;
     public Transform lastCheckPoint;    //last collided checkpoint.
-    [SerializeField] public Transform checkPoint1;  //1st respawnpoint
 
     [Header("Debug")]
     [SerializeField] private bool isGrounded;
@@ -29,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        lastCheckPoint = checkPoint1;
+        lastCheckPoint = GameObject.FindGameObjectWithTag("CheckPoint1").transform; // Finds initial checkpoint
         playerHealth = gameObject.GetComponent<Health>();
     }
 
@@ -115,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckFallOutLevel()
     {
-        if (transform.position.y < -20) DeathSituation(); Debug.Log("Fallen out of map");
+        if (transform.position.y < -80) DeathSituation(); Debug.Log("Fallen out of map");
     }
 
 }

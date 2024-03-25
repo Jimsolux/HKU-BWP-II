@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class MapChecker : MonoBehaviour
 {
-    [SerializeField] GameObject heart1;
+    //[SerializeField] GameObject heart1;
     private bool isHeartDead = false;
     [SerializeField] GameObject wallObject1;
     Health hearthealth;
 
     private void Start()
     {
-        hearthealth = heart1.GetComponent<Health>();
+        //hearthealth = heart1.TryGetComponent<Health>();
         
     }
     
     
     private void Update()
     {
-        if (hearthealth.health <= 0)
-        {
-            Wall1Off();
-            Destroy(heart1);
-        }
+        //if (hearthealth.health <= 0)
+        //{
+        //    Wall1Off();
+        //    Destroy(heart1);
+        //}
         //Debug.Log(hearthealth.health);
     }
 

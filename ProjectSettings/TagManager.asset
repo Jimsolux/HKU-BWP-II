@@ -13,6 +13,7 @@ TagManager:
   - Piercable
   - Receiver
   - Glass
+  - CheckPoint1
   layers:
   - Default
   - TransparentFX

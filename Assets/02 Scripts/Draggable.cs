@@ -41,6 +41,17 @@ public class Draggable : MonoBehaviour
         {
             rb.MovePosition(Vector3.MoveTowards(transform.position, targetPosition, pullForce * Time.deltaTime) ); // ;    // Move towards mouse with pullforce.
             rb.gravityScale = 0;
+
+            //Rotatie
+            if(Input.GetKey(KeyCode.E))
+            {
+                transform.Rotate(new Vector3(0, 0, 1), 1);
+            }
+            if(Input.GetKey(KeyCode.Q)) 
+            {
+                transform.Rotate(new Vector3(0, 0, -1), 1);
+            }
+
         }
     }
     
@@ -56,7 +67,7 @@ public class Draggable : MonoBehaviour
     { // Check collision, if you are allowed to move.
         if(collision.gameObject.CompareTag("Map"))
         {
-            isDraggable = false;
+            //isDraggable = false;
         }
     }
 }

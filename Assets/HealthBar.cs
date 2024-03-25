@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] Health playerHealth;
-    Slider healthSlider;
+    private Health playerHealth;
+    private Slider healthSlider;
 
     private void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<Health>();
+
         healthSlider = GetComponent<Slider>();
         healthSlider.maxValue = playerHealth.maxHealth;
         healthSlider.value = playerHealth.maxHealth;
