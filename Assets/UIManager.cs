@@ -28,14 +28,13 @@ public class UIManager : MonoBehaviour
         "You find yourself an unknown, futuristic place. Your head feels miserable, something must have hit it hard.",
         "Use WASD to walk around. Press the Spacebar to jump.",
         "To use your magic, click and drag objects to telepathically move them around.",
-        "Ohh look, they are mirrors!",
+        "Ohh look, the blocks seem to work as mirrors!",
         "Use Q and E while dragging an object to rotate the moving Object.",
         "There looks to be a laser receiver there! Try aiming one of the lazers on it!"
         };
 
         instance = this;
         EndDisplayExplanation();
-
 
         allWarnings.Add(warning1);
        //allExplanations.Add(explanation1);
@@ -62,13 +61,26 @@ public class UIManager : MonoBehaviour
     public void DisplayWarning(int index)
     {
 
-        if (!warningHasBeenDisplayed) warningBox.text = allWarnings[0];
+        if (!warningHasBeenDisplayed) { warningBox.text = allWarnings[0]; warningHasBeenDisplayed = true; }
         else
         {
-        string value = allWarnings[index];
-        warningBox.text = value;
+            //string value = allWarnings[index];
+            //warningBox.text = value;
+            warningHasBeenDisplayed = true;
+            StartCoroutine("EndDisplayWarning");
         }
 
         //textBoxBackground.SetActive(true);
     }
+
+    private IEnumerator EndDisplayWarning()
+    {
+
+        yield return new WaitForSeconds(6); // wait two 
+        warningBox.text = " ";
+    }
+    //public void EndDisplayWarning()
+    //{
+    //    warningBox.text = " ";
+    //}
 }

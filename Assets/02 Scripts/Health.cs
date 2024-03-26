@@ -8,14 +8,17 @@ public class Health : MonoBehaviour
     [SerializeField] public float health;
     [SerializeField] public float maxHealth = 1000;
 
+
     private void Start()
     {
         health = maxHealth;
+       
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        UIManager.instance.DisplayWarning(0);
     }
 
     public void ResetHealth() { health = maxHealth; }
