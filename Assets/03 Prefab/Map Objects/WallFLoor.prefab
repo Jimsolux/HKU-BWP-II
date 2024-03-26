@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8755829515080998181}
   - component: {fileID: 1295549999279655005}
   - component: {fileID: 6456742081091595029}
-  - component: {fileID: 7045859791154102499}
   - component: {fileID: 5351318210354771601}
   m_Layer: 0
   m_Name: WallFLoor
@@ -132,20 +131,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7045859791154102499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7001151654931237853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad441e5ec69c86c43a77e89294b0cd49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heart1: {fileID: 0}
-  wallObject1: {fileID: 0}
 --- !u!114 &5351318210354771601
 MonoBehaviour:
   m_ObjectHideFlags: 0

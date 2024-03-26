@@ -15,6 +15,7 @@ public class LaserBeam
     private int maxBounces = 50;
     private float laserDamage = 20f;
     private LayerMask layerMask;
+    public LaserDestroySelf selfDestruct;
 
     public LaserBeam(Vector2 pos, Vector2 dir, Material material, LayerMask laserMask)
     {
@@ -25,6 +26,7 @@ public class LaserBeam
         this.dir = dir;
 
         this.laser = this.laserObj.AddComponent(typeof(LineRenderer)) as LineRenderer;
+        this.selfDestruct = this.laserObj.AddComponent(typeof(LaserDestroySelf)) as LaserDestroySelf; 
         this.laser.startWidth = 0.1f;
         this.laser.endWidth = 0.1f;
         this.laser.material = material;
@@ -40,12 +42,13 @@ public class LaserBeam
 
     void CastRay(Vector2 pos, Vector2 dir, LineRenderer laser )
     {
+        
         laserIndices.Add( pos );
 
         ray = new Ray2D(pos, dir);
-        RaycastHit2D hit = Physics2D.Raycast(pos, dir, 30, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(pos, dir, 50, layerMask);
 
-        if(Physics2D.Raycast(pos, dir, 30, layerMask))
+        if(Physics2D.Raycast(pos, dir, 50, layerMask))
         {
             CheckHit(hit, dir, laser);
         }

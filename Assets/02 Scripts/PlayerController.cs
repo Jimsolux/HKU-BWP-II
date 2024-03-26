@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
     public float jumpForce = 10;
-    private Rigidbody2D rb2d;
-    private float deaths = 0;
+    public Rigidbody2D rb2d;
+    private int deaths = 0;
     [SerializeField] private float moveVertical; // = Input.GetAxis("Vertical");
     [SerializeField] float moveHorizontal;
     [SerializeField] Health playerHealth;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
         animator.SetFloat("Vertical", rb2d.velocity.y);
 
-        
+        if (Input.GetKeyDown(KeyCode.P)) MapChecker.instance.NextLevel();
     }
 
 
@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
         transform.position = lastCheckPoint.position;
         playerHealth.ResetHealth();
         deaths += 1;
+        UIManager.instance.DisplayDeaths(deaths);
     }
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
