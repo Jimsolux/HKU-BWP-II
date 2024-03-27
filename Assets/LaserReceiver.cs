@@ -44,11 +44,11 @@ public class LaserReceiver : MonoBehaviour
 
     if(beingHit)
         {
-            Debug.Log("Im Being Hit!");
+            //Debug.Log("Im Being Hit!");
         }
         else
         {
-            Debug.Log("I'm not being Hit xx");
+            //Debug.Log("I'm not being Hit xx");
         }
     if(beingHit && receiverHealth <= 0) { LaserHitEvent.Invoke(); }
 

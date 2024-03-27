@@ -12,11 +12,13 @@ public class LerpTussenKleuren : MonoBehaviour
     private void Start()
     {
         cam = GetComponent<Camera>();
+        activeColor = color1;
     }
     private void FixedUpdate()
     {
-        activeColor = Color.Lerp(color1, color2, 2);  // Mathf.PingPong(0, 1));;
+        activeColor = Color.Lerp(color1, color2, Mathf.PingPong(Time.time, 1));;
         cam.backgroundColor = activeColor;
+        
     }
 
 

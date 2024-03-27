@@ -13,6 +13,7 @@ public class Draggable : MonoBehaviour
     [SerializeField] private float pullForceStart = 15f;
     [SerializeField] private float pullForce;
     private bool isDraggable = true;
+    private bool isDragging = false;
 
 
     private void Start()
@@ -28,6 +29,30 @@ public class Draggable : MonoBehaviour
     }
 
 
+    private void FixedUpdate()
+    {
+        if (isDragging)
+        { //Rotatie
+            if (Input.GetKey(KeyCode.Q))
+            {
+                transform.Rotate(new Vector3(0, 0, 1), 0.5f);
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                transform.Rotate(new Vector3(0, 0, -1), 0.5f);
+            }
+            if (Input.GetKey(KeyCode.Z))
+            {
+                transform.Rotate(new Vector3(0, 0, 1), 2f);
+            }
+            if (Input.GetKey(KeyCode.C))
+            {
+                transform.Rotate(new Vector3(0, 0, -1), 2f);
+            }
+
+        }
+    }
+
     private void OnMouseDown()
     {
         mousePositionOffset = gameObject.transform.position - GetMouseWorldPosition();  //MousePos + offset where you grab item.
@@ -41,16 +66,10 @@ public class Draggable : MonoBehaviour
         {
             rb.MovePosition(Vector3.MoveTowards(transform.position, targetPosition, pullForce * Time.deltaTime) ); // ;    // Move towards mouse with pullforce.
             rb.gravityScale = 0;
+            rb.freezeRotation = true;
 
-            //Rotatie
-            if(Input.GetKey(KeyCode.E))
-            {
-                transform.Rotate(new Vector3(0, 0, 1), 1);
-            }
-            if(Input.GetKey(KeyCode.Q)) 
-            {
-                transform.Rotate(new Vector3(0, 0, -1), 1);
-            }
+            isDragging = true;
+            
 
         }
     }
@@ -59,7 +78,9 @@ public class Draggable : MonoBehaviour
     private void OnMouseUp()    // releasing mouse re enables the grabbing and gravity.
     {
         rb.gravityScale = .5f;
-        isDraggable = true; 
+        isDraggable = true;
+        rb.freezeRotation = false;
+        isDragging = false;
     }
 
 

@@ -37,6 +37,7 @@ public class MapChecker : MonoBehaviour
         currentLevel = DecideActiveLevelObjects();  // Decides the current level GameObjects.
         Level1.SetActive(true);
         Level2.SetActive(false);
+        Level3.SetActive(false);
 
     }
     
@@ -63,6 +64,7 @@ public class MapChecker : MonoBehaviour
         {
             case Levels.Level1:
                 Level1.SetActive(false);
+                Level3.SetActive(false);
                 Level2.SetActive(true);
                 currentLevelEnum = Levels.Level2;   // Now in level 2
                 break;

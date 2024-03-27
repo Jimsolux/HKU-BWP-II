@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private int deaths = 0;
     [SerializeField] private float moveVertical; // = Input.GetAxis("Vertical");
     [SerializeField] float moveHorizontal;
+    [SerializeField] private LayerMask groundLayerMask;
     [SerializeField] Health playerHealth;
     public Transform groundChecker;
     //flip
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         //Debug.DrawRay(groundChecker.position, -Vector3.up * 0.3f , Color.red, 3.0f);   // Visiualizing raycast
-        return Physics2D.Raycast(groundChecker.position, -Vector3.up, 0.3f);    // Raycast down to check if collision is made.
+        return Physics2D.Raycast(groundChecker.position, -Vector3.up, 0.3f, groundLayerMask);    // Raycast down to check if collision is made.
     }
 
 
@@ -115,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckFallOutLevel()
     {
-        if (transform.position.y < -80) DeathSituation(); Debug.Log("Fallen out of map");
+        if (transform.position.y < -80) DeathSituation(); //Debug.Log("Fallen out of map");
     }
 
 }

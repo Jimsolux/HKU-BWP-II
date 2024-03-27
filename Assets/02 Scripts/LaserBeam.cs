@@ -103,6 +103,17 @@ public class LaserBeam
             UpdateLaser();
             return;
         }
+        if (hitinfo.collider.gameObject.tag == "MultiReceiver")
+        {
+            hitinfo.collider.gameObject.TryGetComponent<MultiReceiver>(out MultiReceiver receiver);
+            //receiver.LaserHitEvent.Invoke();
+            receiver.TakeDamage(laserDamage);
+            receiver.AddToArrayLaser(laserObj);
+            receiver.CheckLaserAmount();
+            laserIndices.Add(hitinfo.point);
+            UpdateLaser();
+            return;
+        }
         else
         {
             //hitinfo.collider.gameObject.TryGetComponent<LaserReceiver>(out LaserReceiver receiver);

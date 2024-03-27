@@ -25,19 +25,28 @@ public class UIManager : MonoBehaviour
     {
         allExplanations = new List<string>()
         {
-        "You find yourself an unknown, futuristic place. Your head feels miserable, something must have hit it hard.",
-        "Use WASD to walk around. Press the Spacebar to jump.",
-        "To use your magic, click and drag objects to telepathically move them around.",
-        "Ohh look, the blocks seem to work as mirrors!",
-        "Use Q and E while dragging an object to rotate the moving Object.",
-        "There looks to be a laser receiver there! Try aiming one of the lazers on it!"
+        "You find yourself an unknown, futuristic place. Your head feels miserable, something must have hit it hard.",  //0
+        "Use A and D to walk around. Press the Spacebar to jump.", //1
+        "To use your magic, click and drag the purple objects to telepathically move them around.",    //2
+        "Ohh look, the blocks seem to work as mirrors!",    //3
+        "There seems to be a laser receiver there! Try aiming one of the lazers on it!", //4
+        "Checkpoint saved!",    //5
+        "Use Q and E while dragging an object to rotate the moving Object.",  //6
+        "You have made it to the second lair of this complex, good luck!.",  //7
+        "Use Z and C To rotate blocks faster.", // 8
+        "That looks like a multi-Receiver! It will need two receive two lasers at once to activate.",    //9
+        "Hmm it looks like I could hang that up somewhere...",  //10
+        "How would I block these two upper lasers..."   //11
         };
 
         instance = this;
-        EndDisplayExplanation();
+        
+        //Empty boxes
+        explanationBox.text = " ";
+        textBoxBackground.SetActive(false);
+
 
         allWarnings.Add(warning1);
-       //allExplanations.Add(explanation1);
     }
 
     public void DisplayExplanation(int index)
@@ -45,15 +54,18 @@ public class UIManager : MonoBehaviour
         string value = allExplanations[index];
         explanationBox.text = value;
         textBoxBackground.SetActive(true);
+        StartCoroutine("EndDisplayExplanation");
     }
 
-    public void EndDisplayExplanation()
+    public IEnumerator EndDisplayExplanation()
     {
+        yield return new WaitForSeconds(10); // wait ten seconds and then close display 
         explanationBox.text = " ";
         textBoxBackground.SetActive(false);
+
     }
 
-    public void DisplayDeaths(int deaths)   // Call to update
+    public void DisplayDeaths(int deaths)  
     {
         deathCounter.text = deaths.ToString();
     }
